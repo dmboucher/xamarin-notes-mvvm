@@ -13,7 +13,11 @@ namespace notes
         // Main page constructor
         public MainPage()
         {
-            // Define Controls
+            // Binding
+            BindingContext = new MainPageViewModel();
+
+
+            // Define controls & their bindings
             imgDct = new Image
             {
                 Source = ImageSource.FromResource("notes.Assets.dct.png")  //, typeof(EmbeddedImages).GetTypeInfo().Assembly
@@ -23,7 +27,7 @@ namespace notes
             {
                 FontSize = 20,
                 Margin = new Thickness(10),
-                Text = "Dave's little app playground. Just messing around with Xamarin, MVVM, SQLite, and Azure!"
+                Text = "Dave's little app playground.\nJust messing around with Xamarin, MVVM, SQLite, and Azure!"
             };
 
             btnContinue = new Button
