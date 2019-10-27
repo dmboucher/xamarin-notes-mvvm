@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace notes
 {
-    public class MainPageViewModel : INotifyPropertyChanged
+    public class NotesPageViewModel : INotifyPropertyChanged
     {
-        public MainPageViewModel()
+        public NotesPageViewModel()
         {
             //NotesCollection = new ObservableCollection<NoteModel>();
 
