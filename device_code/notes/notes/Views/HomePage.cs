@@ -2,25 +2,21 @@
 
 namespace notes
 {
-    public class MainPage : ContentPage
+    public class HomePage : Menu
     {
         // Control properties
         readonly Image imgDct;
         readonly Label txtSplash;
-        readonly Button btnContinue;
-
 
         // Main page constructor
-        public MainPage()
+        public HomePage()
         {
-            // Binding
-            BindingContext = new MainPageViewModel();
-
+            Title = "DCT Demo";
 
             // Define controls & their bindings
             imgDct = new Image
             {
-                Source = ImageSource.FromResource("notes.Assets.dct.png")  //, typeof(EmbeddedImages).GetTypeInfo().Assembly
+                Source = ImageSource.FromResource("notes.Assets.dct.png")
             };
 
             txtSplash = new Label
@@ -28,14 +24,6 @@ namespace notes
                 FontSize = 20,
                 Margin = new Thickness(10),
                 Text = "Dave's little app playground.\nJust messing around with Xamarin, MVVM, SQLite, and Azure!"
-            };
-
-            btnContinue = new Button
-            {
-                Text = "Continue",
-                TextColor = Color.White,
-                BackgroundColor = Color.FromHex("0069AA"),
-                Margin = new Thickness(10)
             };
 
 
@@ -50,11 +38,12 @@ namespace notes
                     new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
                 },
 
-                RowDefinitions =
+                    RowDefinitions =
                 {
                     new RowDefinition { Height = new GridLength(1.5, GridUnitType.Star) },
                     new RowDefinition { Height = new GridLength(1.0, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(0.5, GridUnitType.Star) }
+                    new RowDefinition { Height = new GridLength(1.0, GridUnitType.Star) },
+                    new RowDefinition { Height = new GridLength(1.0, GridUnitType.Star) }
                 }
             };
 
@@ -65,8 +54,6 @@ namespace notes
 
             grid.Children.Add(txtSplash, 0, 1);
             Grid.SetColumnSpan(txtSplash, 2);
-
-            grid.Children.Add(btnContinue, 0, 2);
 
 
             // Set the page content
