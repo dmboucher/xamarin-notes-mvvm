@@ -10,6 +10,7 @@
     <None Remove="Assets\dct.png" />
     <None Remove="Assets\edit.png" />
     <None Remove="Assets\home.png" />
+    <None Remove="Assets\sync.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +18,7 @@
     <EmbeddedResource Include="Assets\dct.png" />
     <EmbeddedResource Include="Assets\edit.png" />
     <EmbeddedResource Include="Assets\home.png" />
+    <EmbeddedResource Include="Assets\sync.png" />
   </ItemGroup>
 
   <ItemGroup>
