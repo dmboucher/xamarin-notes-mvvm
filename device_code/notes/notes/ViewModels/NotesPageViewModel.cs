@@ -9,9 +9,18 @@ namespace notes
 {
     public class NotesPageViewModel : INotifyPropertyChanged
     {
-        public NotesPageViewModel()
+        public INavigation Navigation { get; set; }
+
+        public NotesPageViewModel(INavigation navigation)
         {
-            //NotesCollection = new ObservableCollection<NoteModel>();
+            Navigation = navigation;
+
+            NotesCollection = new ObservableCollection<NoteModel>();
+
+            AddNoteCommand = new Command(async () =>
+            {
+                await Navigation.PushOnceAsync<NotesDetailPage>(true).ConfigureAwait(false);
+            });
 
             //SaveNoteCommand = new Command(() =>
             //{
@@ -41,8 +50,9 @@ namespace notes
         //    }
         //}
             
-        //public ObservableCollection<NoteModel> NotesCollection { get; }
+        public ObservableCollection<NoteModel> NotesCollection { get; }
 
+        public Command AddNoteCommand { get; }
         //public Command SaveNoteCommand { get; }
         //public Command EraseNotesCommand { get; }
     }
