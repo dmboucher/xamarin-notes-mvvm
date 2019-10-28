@@ -52,9 +52,19 @@ namespace notes
                     }
                 }
             };
+            
+            var collectionView = new CollectionView
+            {
+                ItemTemplate = new NotesTemplate(),
+                SelectionMode = SelectionMode.Single
+            };
+            collectionView.SetBinding(CollectionView.ItemsSourceProperty, nameof(NotesPageViewModel.NotesCollection));
+            collectionView.SetBinding(CollectionView.SelectedItemProperty, nameof(NotesPageViewModel.SelectedNote));
+            collectionView.SetBinding(CollectionView.SelectionChangedCommandProperty, nameof(NotesPageViewModel.NoteSelectedCommand));
 
 
-            // Define grid
+
+            // Define grid - we don't really need a grid here... I'm just playing with the grid to learn how it works
             var grid = new Grid
             {
                 Margin = new Thickness(20),
@@ -83,6 +93,31 @@ namespace notes
 
             // Set the page content
             Content = grid;
+        }
+
+        class NotesTemplate : DataTemplate
+        {
+            public NotesTemplate() : base(LoadTemplate)
+            {
+            }
+
+            static StackLayout LoadTemplate()
+            {
+                var textLabel = new Label();
+                textLabel.SetBinding(Label.TextProperty, nameof(NoteModel.Title));
+
+                var frame = new Frame
+                {
+                    VerticalOptions = LayoutOptions.Center,
+                    Content = textLabel
+                };
+
+                return new StackLayout
+                {
+                    Children = { frame },
+                    Padding = new Thickness(10, 10)
+                };
+            }
         }
     }
 }

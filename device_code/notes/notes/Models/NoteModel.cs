@@ -13,7 +13,9 @@ namespace notes
         public string Title { get; set; }
         
         public string NoteText { get; set; }
-        
+
+        public string DueDate { get; set; }
+
         public bool Done { get; set; }
         
         public bool IsDeleted { get; set; }

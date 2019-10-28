@@ -10,6 +10,21 @@ namespace notes
     public class NotesPageViewModel : INotifyPropertyChanged
     {
         public INavigation Navigation { get; set; }
+        public ObservableCollection<NoteModel> NotesCollection { get; }
+        public Command AddNoteCommand { get; }
+        public Command NoteSelectedCommand { get; }
+
+        NoteModel selectedNote;
+        public NoteModel SelectedNote
+        {
+            get => selectedNote;
+            set
+            {
+                selectedNote = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedNote)));
+            }
+        }
+
 
         public NotesPageViewModel(INavigation navigation)
         {
@@ -19,41 +34,25 @@ namespace notes
 
             AddNoteCommand = new Command(async () =>
             {
-                await Navigation.PushOnceAsync<NotesDetailPage>(true).ConfigureAwait(false);
+                await Application.Current.MainPage.Navigation.PushAsync(new NotesDetailPage(new NotesDetailPageViewModel())).ConfigureAwait(false);
             });
 
-            //SaveNoteCommand = new Command(() =>
-            //{
-            //    var note = new NoteModel
-            //    {
-            //        Text = NoteText
-            //    };
+            NoteSelectedCommand = new Command(async () =>
+            {
+                if (SelectedNote is null)
+                    return;
 
-            //    NotesCollection.Add(note);
+                var detailViewModel = new NotesDetailPageViewModel
+                {
+                    NoteText = SelectedNote.NoteText
+                };
 
-            //    NoteText = string.Empty;
-            //});
+                await Application.Current.MainPage.Navigation.PushAsync(new NotesDetailPage(detailViewModel)).ConfigureAwait(false);
 
+                SelectedNote = null;
+            });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        //string noteText;
-        //public string NoteText
-        //{
-        //    get => noteText;
-        //    set
-        //    {
-        //        noteText = value;
-        //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(typeof(NoteText)));
-        //        SaveNoteCommand.ChangeCanExecute();
-        //    }
-        //}
-            
-        public ObservableCollection<NoteModel> NotesCollection { get; }
-
-        public Command AddNoteCommand { get; }
-        //public Command SaveNoteCommand { get; }
-        //public Command EraseNotesCommand { get; }
     }
 }
