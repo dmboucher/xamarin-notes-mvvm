@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Xamarin.Forms;
 
 namespace notes
 {
     public class NotesDetailPage : ContentPage
     {
-        public NotesDetailPage(NotesDetailPageViewModel notesDetailPageViewModel)
+        // View constructor
+        public NotesDetailPage(NotesPageViewModel notesPageViewModel)
         {
             // Init
             Title = "Note Details";
-            BindingContext = notesDetailPageViewModel;
+            BindingContext = new NotesDetailPageViewModel(notesPageViewModel);
 
 
             // Note Title Entry

@@ -4,6 +4,7 @@ namespace notes
 {
     public class NotesPage : ContentPage
     {
+        // View Constructor
         public NotesPage()
         {
             // Init
@@ -11,20 +12,32 @@ namespace notes
             BindingContext = new NotesPageViewModel(Navigation);
 
 
-            // Define controls & their bindings
-            var btnAdd = new Button
+            // Add Note Button
+            var addButton = new Button
             {
                 Text = "Add Note",
                 FontSize = 20,
                 ImageSource = ImageSource.FromResource("notes.Assets.plus.png"),
                 TextColor = Color.White,
+                HorizontalOptions = LayoutOptions.Start,
+                WidthRequest = 160,
+                Margin = new Thickness(10, 10, 10, 0),
                 BackgroundColor = (Color)App.Current.Resources["dctBlue"]
             };
-            btnAdd.SetBinding(Button.CommandProperty, nameof(NotesPageViewModel.AddNoteCommand));
+            addButton.SetBinding(Button.CommandProperty, nameof(NotesPageViewModel.AddNoteCommand));
 
-            var swtDoneBundle = new StackLayout
+
+            // Show Done Notes Switch
+            var showDoneNotes = new Switch
             {
-                Margin = new Thickness(0, 20, 0, 0),
+                IsToggled = false,
+                HorizontalOptions = LayoutOptions.Start
+            };
+            showDoneNotes.SetBinding(Switch.IsToggledProperty, nameof(NotesPageViewModel.ShowDoneNotes));
+
+            var showDoneNotesBundle = new StackLayout
+            {
+                Margin = new Thickness(10, 10, 10, 0),
                 Children =
                 {
                     new BoxView
@@ -43,11 +56,7 @@ namespace notes
                                 Text = "Show Done Notes",
                                 FontSize = 20
                             },
-                            new Switch
-                            {
-                                IsToggled = false,
-                                HorizontalOptions = LayoutOptions.Start
-                            }
+                            showDoneNotes
                         }
                     }
                 }
@@ -62,39 +71,20 @@ namespace notes
             collectionView.SetBinding(CollectionView.SelectedItemProperty, nameof(NotesPageViewModel.SelectedNote));
             collectionView.SetBinding(CollectionView.SelectionChangedCommandProperty, nameof(NotesPageViewModel.NoteSelectedCommand));
 
-
-
-            // Define grid - we don't really need a grid here... I'm just playing with the grid to 
-            var grid = new Grid
+            
+            // Load up page content
+            Content = new StackLayout
             {
-                Margin = new Thickness(20),
-
-                ColumnDefinitions =
+                Children =
                 {
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
-                },
-
-                RowDefinitions =
-                {
-                    new RowDefinition { Height = new GridLength(0.25, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(0.2, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(3.0, GridUnitType.Star) }
+                    addButton,
+                    showDoneNotesBundle
                 }
             };
-
-
-            // Add Controls to grid
-            grid.Children.Add(btnAdd, 0, 0);
-            
-            grid.Children.Add(swtDoneBundle, 0, 1);
-            Grid.SetColumnSpan(swtDoneBundle, 2);
-
-
-            // Set the page content
-            Content = grid;
         }
 
+
+        // Data template class for notes
         class NotesTemplate : DataTemplate
         {
             public NotesTemplate() : base(LoadTemplate)

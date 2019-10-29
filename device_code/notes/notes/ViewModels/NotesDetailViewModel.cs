@@ -1,40 +1,22 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace notes
 {
     public class NotesDetailPageViewModel : INotifyPropertyChanged
     {
-        public NotesDetailPageViewModel()
-        {
-            Notes = new ObservableCollection<NoteModel>();
-
-            SaveNoteCommand = new Command(() =>
-            {
-                //Notes.Add(new NoteModel { Text = NoteText });  // Adding to db
-                //NoteText = string.Empty;                       // Clearing form
-                var x = 1;
-            },
-            () => !string.IsNullOrEmpty(NoteTitle));
-
-            DeleteNoteCommand = new Command(() =>
-            {
-                var x = 1;
-            });
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        // Properties
+        NotesPageViewModel parentViewModel;
+        //public ObservableCollection<NoteModel> Notes { get; }
+        public Command SaveNoteCommand { get; }
+        public Command DeleteNoteCommand { get; }
 
         string noteTitle;
         public string NoteTitle
         {
             get => noteTitle;
-            set 
-            { 
+            set
+            {
                 noteTitle = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NoteTitle)));
                 SaveNoteCommand.ChangeCanExecute();
@@ -45,10 +27,10 @@ namespace notes
         public string NoteText
         {
             get => noteText;
-            set 
-            { 
-                noteText = value; 
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NoteText))); 
+            set
+            {
+                noteText = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NoteText)));
             }
         }
 
@@ -56,10 +38,10 @@ namespace notes
         public bool HasDueDate
         {
             get => hasDueDate;
-            set 
-            { 
+            set
+            {
                 hasDueDate = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HasDueDate))); 
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HasDueDate)));
             }
         }
 
@@ -67,10 +49,10 @@ namespace notes
         public string DueDate
         {
             get => dueDate;
-            set 
-            { 
-                dueDate = value; 
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DueDate))); 
+            set
+            {
+                dueDate = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DueDate)));
             }
         }
 
@@ -78,16 +60,44 @@ namespace notes
         public string Done
         {
             get => done;
-            set 
-            { 
-                done = value; 
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Done))); 
+            set
+            {
+                done = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Done)));
             }
         }
 
 
-        public ObservableCollection<NoteModel> Notes { get; }
-        public Command SaveNoteCommand { get; }
-        public Command DeleteNoteCommand { get; }
+        // Events
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+        // Constructor
+        public NotesDetailPageViewModel(NotesPageViewModel notesPageViewModel)
+        {
+            parentViewModel = notesPageViewModel;
+            //Notes = new ObservableCollection<NoteModel>();
+
+
+            // Commands
+            SaveNoteCommand = new Command(() =>
+            {
+                var x = parentViewModel;  // YES! WE HAVE PARENT VIEW MODEL CONTEXT HERE!!  WOOT!!
+                var y = 1;
+                //Notes.Add(new NoteModel { Text = NoteText });
+
+                // Craft object for db
+                // Add to db
+                // Kick off a list re-load in parent view model
+                // Return to NotesPage
+            },
+            () => !string.IsNullOrEmpty(NoteTitle));
+
+
+            DeleteNoteCommand = new Command(() =>
+            {
+                var x = 1;
+            });
+        }
     }
 }

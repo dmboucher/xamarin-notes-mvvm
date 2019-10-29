@@ -6,8 +6,11 @@ namespace notes
 {
     public class App : Application
     {
+        // App properties
         static NoteDatabase database;
 
+
+        // App constructor
         public App()
         {
             // Color resources to use throughout the app
@@ -24,9 +27,10 @@ namespace notes
             };
         }
 
+
+        // Get or create database
         public static NoteDatabase Database
         {
-            // Get or create database
             get
             {
                 if (database == null)
@@ -37,6 +41,8 @@ namespace notes
             }
         }
 
+
+        // State overrides
         protected override void OnStart()
         {
             // Stub
