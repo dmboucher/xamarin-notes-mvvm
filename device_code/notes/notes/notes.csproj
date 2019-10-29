@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\check.png" />
     <None Remove="Assets\database.png" />
     <None Remove="Assets\dct.png" />
     <None Remove="Assets\disk.png" />
@@ -21,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Assets\check.png" />
     <EmbeddedResource Include="Assets\database.png" />
     <EmbeddedResource Include="Assets\dct.png" />
     <EmbeddedResource Include="Assets\disk.png" />

@@ -10,7 +10,7 @@ namespace notes
         [NotNull, Unique]
         public string ServerId { get; set; }  // This value will serve as the PK in the warehouse - will use GUID's to avoid key clashes
         
-        public string Title { get; set; }
+        public string NoteTitle { get; set; }
         
         public string NoteText { get; set; }
 
