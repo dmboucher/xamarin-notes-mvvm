@@ -20,7 +20,7 @@ namespace notes
                 TextColor = Color.White,
                 BackgroundColor = (Color)App.Current.Resources["dctBlue"]
             };
-            btnAdd.SetBinding(Button.CommandProperty, "AddNoteCommand");
+            btnAdd.SetBinding(Button.CommandProperty, nameof(NotesPageViewModel.AddNoteCommand));
 
             var swtDoneBundle = new StackLayout
             {
@@ -64,7 +64,7 @@ namespace notes
 
 
 
-            // Define grid - we don't really need a grid here... I'm just playing with the grid to learn how it works
+            // Define grid - we don't really need a grid here... I'm just playing with the grid to 
             var grid = new Grid
             {
                 Margin = new Thickness(20),

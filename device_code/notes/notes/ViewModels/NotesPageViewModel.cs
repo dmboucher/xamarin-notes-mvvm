@@ -31,10 +31,10 @@ namespace notes
             Navigation = navigation;
 
             NotesCollection = new ObservableCollection<NoteModel>();
-
+            
             AddNoteCommand = new Command(async () =>
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new NotesDetailPage(new NotesDetailPageViewModel())).ConfigureAwait(false);
+                await navigation.PushAsync(new NotesDetailPage(new NotesDetailPageViewModel())).ConfigureAwait(false);
             });
 
             NoteSelectedCommand = new Command(async () =>
@@ -42,12 +42,13 @@ namespace notes
                 if (SelectedNote is null)
                     return;
 
-                var detailViewModel = new NotesDetailPageViewModel
+                var notesDetailPageViewModel = new NotesDetailPageViewModel()
                 {
-                    NoteText = SelectedNote.NoteText
+                    //NoteText = SelectedNote.NoteText
+                    // **************************************** SET PROPERTIES NEEDED FOR THE DETAIL PAGE (POSSIBLY JUST THE SELECTED NOTE ID)
                 };
 
-                await Application.Current.MainPage.Navigation.PushAsync(new NotesDetailPage(detailViewModel)).ConfigureAwait(false);
+                await navigation.PushAsync(new NotesDetailPage(notesDetailPageViewModel)).ConfigureAwait(false);
 
                 SelectedNote = null;
             });
