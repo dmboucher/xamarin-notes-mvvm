@@ -5,18 +5,32 @@
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
+    <None Remove="Assets\check.png" />
     <None Remove="Assets\database.png" />
     <None Remove="Assets\dct.png" />
+    <None Remove="Assets\disk.png" />
     <None Remove="Assets\edit.png" />
     <None Remove="Assets\home.png" />
+    <None Remove="Assets\plus.png" />
+    <None Remove="Assets\sync.png" />
+    <None Remove="Assets\trash.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Assets\check.png" />
     <EmbeddedResource Include="Assets\database.png" />
     <EmbeddedResource Include="Assets\dct.png" />
+    <EmbeddedResource Include="Assets\disk.png" />
     <EmbeddedResource Include="Assets\edit.png" />
     <EmbeddedResource Include="Assets\home.png" />
+    <EmbeddedResource Include="Assets\plus.png" />
+    <EmbeddedResource Include="Assets\sync.png" />
+    <EmbeddedResource Include="Assets\trash.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +38,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+    <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
 </Project>

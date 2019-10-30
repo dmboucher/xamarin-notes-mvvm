@@ -24,23 +24,38 @@ namespace notes
                 IconImageSource = ImageSource.FromResource("notes.Assets.database.png")
             };
 
+            ToolbarItem syncToolbarItem = new ToolbarItem
+            {
+                Order = ToolbarItemOrder.Primary,
+                Priority = 3,
+                IconImageSource = ImageSource.FromResource("notes.Assets.sync.png")
+            };
+
             ToolbarItems.Add(notesToolbarItem);
             ToolbarItems.Add(databaseToolbarItem);
+            ToolbarItems.Add(syncToolbarItem);
 
             notesToolbarItem.Clicked += OnNotesItemClicked;
             databaseToolbarItem.Clicked += OnDatabaseItemClicked;
+            syncToolbarItem.Clicked += OnSyncItemClicked;
         }
 
+
+        // Click handlers
         async void OnNotesItemClicked(object sender, EventArgs e)
         {
-            ToolbarItem item = (ToolbarItem)sender;
+            // ToolbarItem item = (ToolbarItem)sender; // This is the syntax in case we need to interrogate the clicked item
             await Navigation.PushAsync(new NotesPage()).ConfigureAwait(false);
         }
 
         async void OnDatabaseItemClicked(object sender, EventArgs e)
         {
-            ToolbarItem item = (ToolbarItem)sender;
             await Navigation.PushAsync(new DatabasePage()).ConfigureAwait(false);
+        }
+
+        async void OnSyncItemClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SyncPage()).ConfigureAwait(false);
         }
     }
 }
