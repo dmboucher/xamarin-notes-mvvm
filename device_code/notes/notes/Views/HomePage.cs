@@ -8,10 +8,12 @@ namespace notes
         readonly Image imgDct;
         readonly Label txtSplash;
 
+
         // Main page constructor
         public HomePage()
         {
-            Title = "DCT Demo";
+            Title = "Dave's DCT Demo";
+
 
             // Define controls & their bindings
             imgDct = new Image
@@ -27,7 +29,7 @@ namespace notes
             };
 
 
-            // Define grid
+            // Define grid - we don't really need a grid here... I'm just playing with the grid to learn it
             var grid = new Grid
             {
                 Margin = new Thickness(20, 40),
@@ -38,7 +40,7 @@ namespace notes
                     new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
                 },
 
-                    RowDefinitions =
+                RowDefinitions =
                 {
                     new RowDefinition { Height = new GridLength(1.5, GridUnitType.Star) },
                     new RowDefinition { Height = new GridLength(1.0, GridUnitType.Star) },
