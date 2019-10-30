@@ -31,13 +31,13 @@ namespace notes
 
         public Task<int> SaveItemAsync(NoteModel item)
         {
-            if (item?.LocalId != 0)
+            if (item?.LocalId == 0)
             {
-                return database.UpdateAsync(item);
+                return database.InsertAsync(item);
             }
             else
             {
-                return database.InsertAsync(item);
+                return database.UpdateAsync(item);
             }
         }
 
