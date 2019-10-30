@@ -20,7 +20,15 @@ namespace notes
         {
             get
             {
-                return NotesListAll.Where(x => x.Done == false).ToList();
+                return NotesListAll.Where(x => x.Done == false && x.IsDeleted == false).ToList();
+            }
+        }
+
+        public List<NoteModel> NotesListIncludingDone
+        {
+            get
+            {
+                return NotesListAll.Where(x => x.IsDeleted == false).ToList();
             }
         }
 
@@ -53,7 +61,7 @@ namespace notes
             set
             {
                 showDoneNotes = value;
-                NotesListViewable = showDoneNotes ? NotesListAll : NotesListNotDone;
+                NotesListViewable = showDoneNotes ? NotesListIncludingDone : NotesListNotDone;
                 OnPropertyChanged(nameof(ShowDoneNotes));
                 OnPropertyChanged(nameof(NotesListViewable));
             }
@@ -95,7 +103,7 @@ namespace notes
         {
             NotesListAll = App.Database.GetItemsAsync().Result;  // Update the overall list.
             NotesListViewable = new List<NoteModel>();  // Clear the viewable list.
-            NotesListViewable = showDoneNotes ? NotesListAll : NotesListNotDone;  // Reset the viewable list.
+            NotesListViewable = showDoneNotes ? NotesListIncludingDone : NotesListNotDone;  // Reset the viewable list.
             OnPropertyChanged(nameof(NotesListViewable));
         }
 

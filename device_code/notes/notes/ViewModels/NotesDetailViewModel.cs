@@ -17,6 +17,22 @@ namespace notes
 
         public NoteModel SelectedNote { get; set; }
 
+        //private bool canDelete;
+        //private bool CanDelete
+        //{
+        //    get => LocalId != 0;
+        //    set
+        //    {
+        //        canDelete = LocalId != 0;
+        //        DeleteNoteCommand.ChangeCanExecute();
+        //    }
+        //}
+
+        private bool CanDelete()
+        {
+            return LocalId != 0;
+        }
+
         private int localId;
         public int LocalId
         {
@@ -107,10 +123,13 @@ namespace notes
             () => !string.IsNullOrEmpty(SelectedNote.NoteTitle));
 
 
-            DeleteNoteCommand = new Command(() =>
+            DeleteNoteCommand = new Command(async () =>
             {
-                var x = 1;
-            });
+                SelectedNote.LastUpdated = DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm", CultureInfo.InvariantCulture);
+                SelectedNote.IsDeleted = true;
+                await App.Database.SaveItemAsync(SelectedNote).ConfigureAwait(false);
+                CloseAndRefresh();
+            }, CanDelete);
 
 
             // Load ViewModel properties from the SelectedNote - this must come after the command declarations above.
