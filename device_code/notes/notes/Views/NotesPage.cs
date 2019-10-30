@@ -129,7 +129,7 @@ namespace notes
             };
             notesListView.SetBinding(ListView.ItemsSourceProperty, nameof(NotesPageViewModel.NotesListViewable));
             notesListView.SetBinding(ListView.SelectedItemProperty, nameof(NotesPageViewModel.SelectedNote));
-            notesListView.ItemTapped += async (sender, e) => { notesPageViewModel.NoteSelectedCommand.Execute(null); };
+            notesListView.ItemTapped += (sender, e) => { notesPageViewModel.NoteSelectedCommand.Execute(null); };
 
 
             // Load up page content

@@ -102,19 +102,7 @@ namespace notes
             {
                 SelectedNote.LastUpdated = DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm", CultureInfo.InvariantCulture);
                 await App.Database.SaveItemAsync(SelectedNote).ConfigureAwait(false);
-
-
-                //var x = parentViewModel;  // YES! WE HAVE PARENT VIEW MODEL CONTEXT HERE!!  WOOT!!
-                // use this to refresh the list so the new item shows up.
-
-                //parentViewModel.RefreshNotesList();
-
-                //Notes.Add(new NoteModel { Text = NoteText });
-
-                // Craft object for db
-                // Add to db
-                // Kick off a list re-load in parent view model
-                // Return to NotesPage
+                CloseAndRefresh();
             },
             () => !string.IsNullOrEmpty(SelectedNote.NoteTitle));
 
@@ -143,6 +131,13 @@ namespace notes
             //IsDeleted = SelectedNote.IsDeleted;
             //LastUpdated = SelectedNote.LastUpdated;
             //LastSync = SelectedNote.LastSync;
+        }
+
+
+        private void CloseAndRefresh()
+        {
+            Device.BeginInvokeOnMainThread(async () => await Application.Current.MainPage.Navigation.PopAsync().ConfigureAwait(false));
+            parentViewModel.RefreshNoteList();
         }
     }
 }

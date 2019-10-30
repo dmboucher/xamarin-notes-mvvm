@@ -12,6 +12,7 @@ namespace notes
         public INavigation Navigation { get; set; }
         public Command AddNoteCommand { get; }
         public Command NoteSelectedCommand { get; }
+        public Command NotesListRefreshCommand { get; }
 
         public List<NoteModel> NotesListViewable { get; set; }
 
@@ -23,11 +24,14 @@ namespace notes
             }
         }
 
-        public List<NoteModel> NotesListAll
+        private List<NoteModel> notesListAll;
+        public List<NoteModel> NotesListAll 
         {
-            get
+            get => notesListAll;
+            set
             {
-                return App.Database.GetItemsAsync().Result;
+                notesListAll = value;
+                OnPropertyChanged(nameof(NotesListAll));
             }
         }
 
@@ -38,7 +42,7 @@ namespace notes
             set
             {
                 selectedNote = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SelectedNote)));
+                OnPropertyChanged(nameof(SelectedNote));
             }
         }
 
@@ -50,8 +54,8 @@ namespace notes
             {
                 showDoneNotes = value;
                 NotesListViewable = showDoneNotes ? NotesListAll : NotesListNotDone;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShowDoneNotes)));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NotesListViewable)));
+                OnPropertyChanged(nameof(ShowDoneNotes));
+                OnPropertyChanged(nameof(NotesListViewable));
             }
         }
 
@@ -65,6 +69,7 @@ namespace notes
         {
             // Init
             Navigation = navigation;
+            RefreshNoteList();
             NotesListViewable = NotesListNotDone;
 
 
@@ -83,6 +88,21 @@ namespace notes
             {
                 await navigation.PushAsync(new NotesDetailPage(this)).ConfigureAwait(false);
             });
+        }
+
+
+        public void RefreshNoteList()
+        {
+            NotesListAll = App.Database.GetItemsAsync().Result;  // Update the overall list.
+            NotesListViewable = new List<NoteModel>();  // Clear the viewable list.
+            NotesListViewable = showDoneNotes ? NotesListAll : NotesListNotDone;  // Reset the viewable list.
+            OnPropertyChanged(nameof(NotesListViewable));
+        }
+
+
+        public void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }
