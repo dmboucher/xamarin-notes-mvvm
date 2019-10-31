@@ -15,7 +15,7 @@ namespace notes
         public NotesPage()
         {
             // Init
-            Title = "Notes";
+            Title = "Notes App";
             var notesPageViewModel = new NotesPageViewModel(Navigation);
             BindingContext = notesPageViewModel;
 

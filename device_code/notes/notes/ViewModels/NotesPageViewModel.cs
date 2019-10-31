@@ -104,7 +104,7 @@ namespace notes
             NotesListAll = App.Database.GetItemsAsync().Result;  // Update the overall list.
             NotesListViewable = new List<NoteModel>();  // Clear the viewable list.
             NotesListViewable = showDoneNotes ? NotesListIncludingDone : NotesListNotDone;  // Reset the viewable list.
-            OnPropertyChanged(nameof(NotesListViewable));
+            OnPropertyChanged(nameof(NotesListViewable));  // Throw changed event.
         }
 
 

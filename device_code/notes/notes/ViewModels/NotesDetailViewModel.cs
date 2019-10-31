@@ -17,17 +17,6 @@ namespace notes
 
         public NoteModel SelectedNote { get; set; }
 
-        //private bool canDelete;
-        //private bool CanDelete
-        //{
-        //    get => LocalId != 0;
-        //    set
-        //    {
-        //        canDelete = LocalId != 0;
-        //        DeleteNoteCommand.ChangeCanExecute();
-        //    }
-        //}
-
         private bool CanDelete()
         {
             return LocalId != 0;

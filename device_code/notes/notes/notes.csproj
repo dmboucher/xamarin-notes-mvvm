@@ -17,6 +17,8 @@
     <None Remove="Assets\edit.png" />
     <None Remove="Assets\home.png" />
     <None Remove="Assets\plus.png" />
+    <None Remove="Assets\records.png" />
+    <None Remove="Assets\schema.png" />
     <None Remove="Assets\sync.png" />
     <None Remove="Assets\table.png" />
     <None Remove="Assets\trash.png" />
@@ -30,6 +32,8 @@
     <EmbeddedResource Include="Assets\edit.png" />
     <EmbeddedResource Include="Assets\home.png" />
     <EmbeddedResource Include="Assets\plus.png" />
+    <EmbeddedResource Include="Assets\records.png" />
+    <EmbeddedResource Include="Assets\schema.png" />
     <EmbeddedResource Include="Assets\sync.png" />
     <EmbeddedResource Include="Assets\table.png" />
     <EmbeddedResource Include="Assets\trash.png" />
