@@ -4,51 +4,36 @@ namespace notes
 {
     public class DatabasePage : ContentPage
     {
-        // Control properties
-        readonly Label txtSplash;
 
         // Database page constructor
         public DatabasePage()
         {
-            Title = "Database";
+            //Init
+            Title = "Database Page";
+            BindingContext = new DatabasePageViewModel(Navigation);
 
-            // Define controls & their bindings
-            txtSplash = new Label
+
+            // Table Mapping Button
+            var tableMappingButton = new Button
             {
+                Text = "Table Mapping",
                 FontSize = 20,
-                Margin = new Thickness(10),
-                Text = "Database Page"
+                ImageSource = ImageSource.FromResource("notes.Assets.table.png"),
+                TextColor = Color.White,
+                HorizontalOptions = LayoutOptions.Start,
+                WidthRequest = 240,
+                Margin = new Thickness(10, 10, 10, 0),
+                BackgroundColor = (Color)App.Current.Resources["dctBlue"]
             };
+            tableMappingButton.SetBinding(Button.CommandProperty, nameof(DatabasePageViewModel.TableMappingCommand));
 
-
-            // Define grid
-            var grid = new Grid
+            Content = new StackLayout
             {
-                Margin = new Thickness(20, 40),
-
-                ColumnDefinitions =
+                Children = 
                 {
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
-                },
-
-                RowDefinitions =
-                {
-                    new RowDefinition { Height = new GridLength(1.0, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(1.0, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(1.0, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(1.0, GridUnitType.Star) }
+                    tableMappingButton
                 }
             };
-
-
-            // Add Controls to grid
-            grid.Children.Add(txtSplash, 0, 0);
-            Grid.SetColumnSpan(txtSplash, 2);
-
-
-            // Set the page content
-            Content = grid;
         }
     }
 }
