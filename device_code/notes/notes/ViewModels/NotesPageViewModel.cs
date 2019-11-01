@@ -88,13 +88,13 @@ namespace notes
                 {
                     ServerId = Guid.NewGuid().ToString()
                 };
-                await navigation.PushAsync(new NotesDetailPage(this)).ConfigureAwait(false);
+                await Navigation.PushAsync(new NotesDetailPage(this)).ConfigureAwait(false);
             });
 
 
             NoteSelectedCommand = new Command(async () =>
             {
-                await navigation.PushAsync(new NotesDetailPage(this)).ConfigureAwait(false);
+                await Navigation.PushAsync(new NotesDetailPage(this)).ConfigureAwait(false);
             });
         }
 

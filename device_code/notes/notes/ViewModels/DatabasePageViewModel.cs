@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Xamarin.Forms;
+using SQLite;
 
 namespace notes
 {
@@ -38,6 +39,17 @@ namespace notes
             }
         }
 
+        private List<SQLiteConnection.ColumnInfo> tableInfo;
+        public List<SQLiteConnection.ColumnInfo> TableInfo
+        {
+            get => tableInfo;
+            set
+            {
+                tableInfo = value;
+                OnPropertyChanged(nameof(TableInfo));
+            }
+        }
+
 
         // Events
         public event PropertyChangedEventHandler PropertyChanged;
@@ -57,8 +69,8 @@ namespace notes
             TableSchemaCommand = new Command<TableModel>(async (tableModel) =>
             {
                 SelectedTable = tableModel;
-                var tableInfo = await App.Database.GetTableInfo(SelectedTable.TableName).ConfigureAwait(false);
-                var x = 1;
+                TableInfo = App.Database.GetTableInfo(SelectedTable.TableName).Result;
+                await Navigation.PushAsync(new DatabaseSchemaPage(this)).ConfigureAwait(false);
             });
 
             TableRecordsCommand = new Command<TableModel>(async (tableModel) =>

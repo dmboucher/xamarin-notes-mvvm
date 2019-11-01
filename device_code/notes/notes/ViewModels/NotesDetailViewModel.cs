@@ -29,7 +29,7 @@ namespace notes
             set
             {
                 localId = SelectedNote.LocalId = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LocalId)));
+                OnPropertyChanged(nameof(LocalId));
             }
         }
 
@@ -40,7 +40,7 @@ namespace notes
             set
             {
                 noteTitle = SelectedNote.NoteTitle = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NoteTitle)));
+                OnPropertyChanged(nameof(NoteTitle));
                 SaveNoteCommand.ChangeCanExecute();
             }
         }
@@ -52,7 +52,7 @@ namespace notes
             set
             {
                 noteText = SelectedNote.NoteText = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(NoteText)));
+                OnPropertyChanged(nameof(NoteText));
             }
         }
 
@@ -63,7 +63,7 @@ namespace notes
             set
             {
                 hasDueDate = SelectedNote.HasDueDate = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HasDueDate)));
+                OnPropertyChanged(nameof(HasDueDate));
             }
         }
 
@@ -74,7 +74,7 @@ namespace notes
             set
             {
                 dueDate = SelectedNote.DueDate = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DueDate)));
+                OnPropertyChanged(nameof(DueDate));
             }
         }
 
@@ -85,7 +85,7 @@ namespace notes
             set
             {
                 done = SelectedNote.Done = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Done)));
+                OnPropertyChanged(nameof(Done));
             }
         }
 
@@ -130,15 +130,11 @@ namespace notes
         private void InitViewModel()
         {
             LocalId = SelectedNote.LocalId;
-            //ServerId = SelectedNote.ServerId;
             NoteTitle = SelectedNote.NoteTitle;
             NoteText = SelectedNote.NoteText;
             HasDueDate = SelectedNote.HasDueDate;
             DueDate = SelectedNote.DueDate;
             Done = SelectedNote.Done;
-            //IsDeleted = SelectedNote.IsDeleted;
-            //LastUpdated = SelectedNote.LastUpdated;
-            //LastSync = SelectedNote.LastSync;
         }
 
 
@@ -146,6 +142,12 @@ namespace notes
         {
             Device.BeginInvokeOnMainThread(async () => await Application.Current.MainPage.Navigation.PopAsync().ConfigureAwait(false));
             parentViewModel.RefreshNoteList();
+        }
+
+
+        public void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

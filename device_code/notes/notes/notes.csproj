@@ -14,6 +14,7 @@
     <None Remove="Assets\database.png" />
     <None Remove="Assets\dct.png" />
     <None Remove="Assets\disk.png" />
+    <None Remove="Assets\dismiss.png" />
     <None Remove="Assets\edit.png" />
     <None Remove="Assets\home.png" />
     <None Remove="Assets\plus.png" />
@@ -29,6 +30,7 @@
     <EmbeddedResource Include="Assets\database.png" />
     <EmbeddedResource Include="Assets\dct.png" />
     <EmbeddedResource Include="Assets\disk.png" />
+    <EmbeddedResource Include="Assets\dismiss.png" />
     <EmbeddedResource Include="Assets\edit.png" />
     <EmbeddedResource Include="Assets\home.png" />
     <EmbeddedResource Include="Assets\plus.png" />
