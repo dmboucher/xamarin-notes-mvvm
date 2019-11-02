@@ -50,6 +50,17 @@ namespace notes
             }
         }
 
+        private List<NoteModel> notesListAll;
+        public List<NoteModel> NotesListAll
+        {
+            get => notesListAll;
+            set
+            {
+                notesListAll = value;
+                OnPropertyChanged(nameof(NotesListAll));
+            }
+        }
+
 
         // Events
         public event PropertyChangedEventHandler PropertyChanged;
@@ -62,8 +73,6 @@ namespace notes
             Navigation = navigation;
             RefreshTableList();
 
-            //AddProgressToChallengeCommand = new Command<Challenge>((challenge) =>
-            //doSomething(challenge);
 
             // Commands
             TableSchemaCommand = new Command<TableModel>(async (tableModel) =>
@@ -75,11 +84,14 @@ namespace notes
 
             TableRecordsCommand = new Command<TableModel>(async (tableModel) =>
             {
-                var x = 1;
+                SelectedTable = tableModel;
+                NotesListAll = App.Database.GetItemsAsync().Result;
+                await Navigation.PushAsync(new DatabaseRecordsPage(this)).ConfigureAwait(false);
             });
 
             TableMappingCommand = new Command(async () =>
             {
+                //****************************** GET RID OF THIS? GET RID OF THE MAPPING BUTTON?
                 var x = 1;
             });
         }

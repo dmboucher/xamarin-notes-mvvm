@@ -55,7 +55,7 @@ namespace notes
                         VerticalTextAlignment = TextAlignment.Center,
                         HorizontalOptions = LayoutOptions.EndAndExpand
                     };
-                    notNull.SetBinding(Label.TextProperty, "notnull");
+                    notNull.SetBinding(Label.TextProperty, new Binding("notnull", converter: new ValueConverter()));
 
                     var stackLayout = new StackLayout
                     {
