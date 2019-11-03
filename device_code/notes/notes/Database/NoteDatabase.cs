@@ -19,11 +19,6 @@ namespace notes
             return database.Table<NoteModel>().ToListAsync();
         }
 
-        public Task<List<NoteModel>> GetItemsNotDoneAsync()
-        {
-            return database.QueryAsync<NoteModel>("SELECT * FROM [Note] WHERE [Done] = 0");
-        }
-
         public Task<NoteModel> GetItemAsync(int LocalId)
         {
             return database.Table<NoteModel>().Where(i => i.LocalId == LocalId).FirstOrDefaultAsync();
@@ -44,6 +39,16 @@ namespace notes
         public Task<int> DeleteItemAsync(NoteModel item)
         {
             return database.DeleteAsync(item);
+        }
+
+        public Task<List<TableModel>> GetTableNames()
+        {
+            return database.QueryAsync<TableModel>("SELECT name AS TableName FROM sqlite_master WHERE type = 'table' AND name NOT LIKE 'sqlite_%' ORDER BY name;");
+        }
+
+        public Task<List<SQLiteConnection.ColumnInfo>> GetTableInfo(string tableName)
+        {
+            return database.GetTableInfoAsync(tableName);
         }
 
     }
