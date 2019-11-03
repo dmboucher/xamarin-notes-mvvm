@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using Xamarin.Forms;
-using SQLite;
 
 namespace notes
 {
@@ -13,8 +10,8 @@ namespace notes
         DatabasePageViewModel parentViewModel;
         public INavigation Navigation { get; set; }
 
-        private List<NoteModel> notesListAll;
-        public List<NoteModel> NotesListAll
+        private ObservableCollection<NoteModel> notesListAll;
+        public ObservableCollection<NoteModel> NotesListAll
         {
             get => notesListAll;
             set
@@ -34,7 +31,13 @@ namespace notes
         {
             // Init
             parentViewModel = databasePageViewModel;
-            NotesListAll = parentViewModel.NotesListAll;
+
+            // Convert List to Observable Collection for the Carousel Page Data Binding
+            NotesListAll = new ObservableCollection<NoteModel>();
+            foreach (var note in parentViewModel.NotesListAll)
+            {
+                NotesListAll.Add(note);
+            }
         }
 
 

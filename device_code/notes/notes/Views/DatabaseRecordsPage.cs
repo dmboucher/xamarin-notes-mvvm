@@ -2,88 +2,84 @@
 
 namespace notes
 {
-    public class DatabaseRecordsPage : ContentPage
+    public class DatabaseRecordsPage : CarouselPage
     {
         public DatabaseRecordsPage(DatabasePageViewModel databasePageViewModel)
         {
             Title = $"{databasePageViewModel.SelectedTable.TableName} Records";
-            BindingContext = new DatabaseRecordsPagelViewModel(databasePageViewModel);
-
-
-            // Title
-            var dummy = new Label
-            {
-                Text = "Hello",
-                FontSize = 20,
-                FontAttributes = FontAttributes.Bold
-            };
-            //tableName.SetBinding(Label.TextProperty, "TableDisplayName");
-
-            //var titleBundle = new StackLayout
-            //{
-            //    Margin = new Thickness(10, 10, 10, 0),
-            //    Children =
-            //    {
-            //        tableName,
-            //        new BoxView
-            //        {
-            //            Margin = new Thickness(0, 5, 0, 0),
-            //            BackgroundColor = Color.DarkGray,
-            //            HeightRequest = 1,
-            //            WidthRequest = 1
-            //        }
-            //    }
-            //};
-
+            var databaseRecordsPagelViewModel = new DatabaseRecordsPagelViewModel(databasePageViewModel);
+            BindingContext = databaseRecordsPagelViewModel;
             
-            //// Schema List View
-            //var schemaListView = new ListView
-            //{
-            //    Margin = new Thickness(20, 5),
-            //    ItemTemplate = new DataTemplate(() =>
-            //    {
-            //        var fieldName = new Label
-            //        {
-            //            FontSize = 20,
-            //            VerticalTextAlignment = TextAlignment.Center,
-            //            HorizontalOptions = LayoutOptions.Start
-            //        };
-            //        fieldName.SetBinding(Label.TextProperty, "Name");
 
-            //        var notNull = new Label
-            //        {
-            //            FontSize = 20,
-            //            VerticalTextAlignment = TextAlignment.Center,
-            //            HorizontalOptions = LayoutOptions.EndAndExpand
-            //        };
-            //        notNull.SetBinding(Label.TextProperty, new Binding("notnull", converter: new ValueConverter()));
-
-            //        var stackLayout = new StackLayout
-            //        {
-            //            Padding = new Thickness(5),
-            //            Margin = new Thickness(0, 0, 0, 2),
-            //            BackgroundColor = Color.LightGray,
-            //            Orientation = StackOrientation.Horizontal,
-            //            HorizontalOptions = LayoutOptions.FillAndExpand,
-            //            Children =
-            //            {
-            //                fieldName,
-            //                notNull
-            //            }
-            //        };
-
-            //        return new ViewCell { View = stackLayout };
-            //    })
-            //};
-            //schemaListView.SetBinding(ListView.ItemsSourceProperty, nameof(DatabaseSchemaPagelViewModel.TableInfo));
-
-
-            // Load up content
-            Content = new StackLayout
+            // Records Carousel View
+            ItemTemplate = new DataTemplate(() =>
             {
-                Children = {
-                    dummy
-                }
+                // Pull data
+                var localId = FormatFieldData("LocalId");
+                var serverId = FormatFieldData("ServerId");
+                var noteTitle = FormatFieldData("NoteTitle");
+                var noteText = FormatFieldData("NoteText");
+                var hasDueDate = FormatFieldData("HasDueDate");
+                var dueDate = FormatFieldData("DueDate");
+                var done = FormatFieldData("Done");
+                var isDeleted = FormatFieldData("IsDeleted");
+                var lastUpdated = FormatFieldData("LastUpdated");
+                var lastSync = FormatFieldData("LastSync");
+
+
+                // Return the content
+                return new ContentPage
+                {
+                    Padding = new Thickness(10),
+                    Content = new StackLayout
+                    {
+                        Children = {
+                            localId,
+                            serverId,
+                            noteTitle,
+                            noteText,
+                            hasDueDate,
+                            dueDate,
+                            done,
+                            isDeleted,
+                            lastUpdated,
+                            lastSync
+                        }
+                    }
+                };
+            });
+
+
+            // Binding for Carousel View
+            ItemsSource = databaseRecordsPagelViewModel.NotesListAll;
+        }
+
+
+        // Format data for each field of each record
+        private StackLayout FormatFieldData(string fieldName)
+        {
+            var field = new Label
+            {
+                FontSize = 20,
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalOptions = LayoutOptions.Start
+            };
+            field.SetBinding(Label.TextProperty, fieldName);
+
+            return new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Children =
+                    {
+                        new Label
+                        {
+                            Text = $"{fieldName}:  ",
+                            FontSize = 20,
+                            VerticalTextAlignment = TextAlignment.Center,
+                            HorizontalOptions = LayoutOptions.Start
+                        },
+                        field
+                    }
             };
         }
     }
