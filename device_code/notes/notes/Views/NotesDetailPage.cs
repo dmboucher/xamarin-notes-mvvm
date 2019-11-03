@@ -162,17 +162,6 @@ namespace notes
             };
 
 
-            // Selected Note Id
-            var selectedNoteId = new Label
-            {
-                FontSize = 20,
-                FontAttributes = FontAttributes.Italic,
-                TextColor = Color.Gray,
-                Margin = new Thickness(10, 0)
-            };
-            selectedNoteId.SetBinding(Label.TextProperty, nameof(NotesDetailPageViewModel.LocalId));
-
-
             // Load up page content
             Content = new StackLayout
             {
@@ -184,8 +173,7 @@ namespace notes
                     dueDateBundle,
                     doneBundle,
                     actionButtonsBundle,
-                    footnote,
-                    selectedNoteId
+                    footnote
                 }
             };
         }
