@@ -16,7 +16,7 @@ namespace notes
             {
                 // Pull data
                 var localId = FormatFieldData("LocalId");
-                var serverId = FormatFieldData("ServerId");
+                var serverId = FormatFieldData("ServerId", true);
                 var noteTitle = FormatFieldData("NoteTitle");
                 var noteText = FormatFieldData("NoteText");
                 var hasDueDate = FormatFieldData("HasDueDate");
@@ -56,11 +56,11 @@ namespace notes
 
 
         // Format data for each field of each record
-        private StackLayout FormatFieldData(string fieldName)
+        private StackLayout FormatFieldData(string fieldName, bool smallValueText = false)
         {
             var field = new Label
             {
-                FontSize = 20,
+                FontSize = smallValueText ? 15 : 20,
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalOptions = LayoutOptions.Start
             };
@@ -75,6 +75,7 @@ namespace notes
                         {
                             Text = $"{fieldName}:  ",
                             FontSize = 20,
+                            FontAttributes = FontAttributes.Bold,
                             VerticalTextAlignment = TextAlignment.Center,
                             HorizontalOptions = LayoutOptions.Start
                         },
