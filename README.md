@@ -38,7 +38,7 @@ The main screen behind the `Database` menu item shows a dynamic `ListView` contr
 **Database Schema Screen:**\
 This screen shows all fields in the selected table, as well as an indicator showing if the fields are nullable or not-nullable. 
 
-![dct_07](misc/screenshots/dct_07.png)
+![dct_07](misc/screenshots/dct_07.png#1)
 
 **Database Records Carousel Screens:**\
 These views are accessable by swiping left and right.  There is one screen/view for each record in the selected table.  The formatting is only rudimentary at this point, but the main idea here was to experiment with the `CarouselPage` views, rather than spending a bunch of time making everything beautiful. 
