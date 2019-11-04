@@ -12,8 +12,12 @@ Notes can be created, edited, updated, and deleted.  All deletes are soft-delete
 This is not yet created.  Soon, I will create a Sync Engine infrastructure that will allow devices to work seamlessly when disconnected.  The devices will periodically sync back to an Azure database via Azure API's & functions, storing their data into a central Azure SQL Database.
 
 ## Screen Shots
-**Splash Screen:** Serves no purpose other than to play with layouts, images, menus, navigation, etc.
-![Splash Screen](misc/screenshots/dct01a.png)
+**Splash Screen:**
+Serves no purpose other than to play with layouts, images, menus, navigation, etc.
 
-**Main Notes App screen:** Displays all non-deleted, non-done notes by default.  Can toggle to see non-deleted, done notes.  Has button to add a new note.
+![Splash Screen](misc/screenshots/dct01.png)
+
+**Main Notes App screen:**
+Displays all non-deleted, non-done notes by default.  Can toggle to see non-deleted, done notes.  Has button to add a new note.
+
 ![Main Notes App Screen](misc/screenshots/dct02.png)
