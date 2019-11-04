@@ -13,7 +13,7 @@ This is not yet created.  Soon, I will create a Sync Engine infrastructure that 
 
 ## Screen Shots
 **Splash Screen:** Serves no purpose other than to play with layouts, images, menus, navigation, etc.
-![SplashScreen](misc/screenshots/dct01.png|width=200px)
+![Splash Screen](misc/screenshots/dct01a.png)
 
 **Main Notes App screen:** Displays all non-deleted, non-done notes by default.  Can toggle to see non-deleted, done notes.  Has button to add a new note.
-![MainNotesAppScreen](misc/screenshots/dct02.png =300x)
+![Main Notes App Screen](misc/screenshots/dct02.png)
