@@ -44,3 +44,6 @@ This screen shows all fields in the selected table, as well as an indicator show
 These views are accessable by swiping left and right.  There is one screen/view for each record in the selected table.  The formatting is only rudimentary at this point, but the main idea here was to experiment with the `CarouselPage` views, rather than spending a bunch of time making everything beautiful. 
 
 ![dct_08](misc/screenshots/dct_08.png)
+
+## Moving Forward
+This repo remains a work-in-progress.  I'm not looking for contributors as the app is really not useful.  However, if looking at the code can help you... Great!  If you are laughing at the ridiculous mistakes that I'm sure I've made in my code, I would welcome your thoughts and suggestions for improvements.  That will help me learn, so thanks in advance for that!
