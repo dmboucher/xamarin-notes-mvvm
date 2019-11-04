@@ -1,4 +1,6 @@
 # xamarin-notes-mvvm
+
+## Intro / Approach
 I'm teaching myself Xamarin and I wanted a playground to mess around with various concepts... hence this repo.
 
 I removed the XAML files and built all UI screens using Xamarin Forms in the common project using only C# code.  I did not touch the iOS, Android, or UWP projects at all.  I used SQLite for persistent local device storage.
@@ -12,14 +14,18 @@ Notes can be created, edited, updated, and deleted.  All deletes are soft-delete
 This is not yet created.  Soon, I will create a Sync Engine infrastructure that will allow devices to work seamlessly when disconnected.  The devices will periodically sync back to an Azure database via Azure API's & functions, storing their data into a central Azure SQL Database.
 
 ## Screen Shots
-**Splash Screen:**
 
+**Splash Screen:**
 Serves no purpose other than to play with layouts, images, menus, navigation, etc.
 
 ![Splash Screen](misc/screenshots/dct_01.png)
 
-**Main Notes App screen:**
-
+**Main Notes App Screen:**
 Displays all non-deleted, non-done notes by default.  Can toggle to see non-deleted, done notes.  Has button to add a new note.
 
-![Main Notes App Screen](misc/screenshots/dct_02.png)
+![Main Notes App Screen](misc/screenshots/dct_02.png)  ![Main Notes App Screen](misc/screenshots/dct_03.png)
+
+**Notes App Detail Screen:**
+Displays all non-deleted, non-done notes by default.  Can toggle to see non-deleted, done notes.  Has button to add a new note.
+
+!(misc/screenshots/dct_02.png)
